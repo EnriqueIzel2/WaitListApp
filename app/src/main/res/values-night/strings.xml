@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hint_guest_name">Name</string>
+    <string name="btn_add_guest">Add Guest</string>
+</resources>

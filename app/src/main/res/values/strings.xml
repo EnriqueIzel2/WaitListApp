@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">WaitListApp</string>
+    <string name="hint_guest_name">Name</string>
+    <string name="btn_add_guest">Add Guest</string>
+</resources>
