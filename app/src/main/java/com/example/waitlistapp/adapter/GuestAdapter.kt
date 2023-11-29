@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.waitlistapp.R
 import com.example.waitlistapp.data.WaitlistContract
 
-class GuestAdapter(private val cursor: Cursor) :
+class GuestAdapter(private var cursor: Cursor) :
   RecyclerView.Adapter<GuestAdapter.GuestViewHolder>() {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GuestViewHolder {
@@ -41,6 +41,16 @@ class GuestAdapter(private val cursor: Cursor) :
   }
 
   override fun getItemCount(): Int = cursor.count
+
+  fun swapCursor(newCursor: Cursor) {
+    cursor.close()
+
+    newCursor.let {
+      cursor = it
+    }
+
+    notifyDataSetChanged()
+  }
 
   inner class GuestViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     var textViewGuestName: TextView
