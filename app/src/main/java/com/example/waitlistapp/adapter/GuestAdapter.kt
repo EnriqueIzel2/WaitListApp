@@ -1,12 +1,16 @@
 package com.example.waitlistapp.adapter
 
+import android.database.Cursor
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.waitlistapp.R
+import com.example.waitlistapp.data.WaitlistContract
 
-class GuestAdapter : RecyclerView.Adapter<GuestAdapter.GuestViewHolder>() {
+class GuestAdapter(private val cursor: Cursor) :
+  RecyclerView.Adapter<GuestAdapter.GuestViewHolder>() {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GuestViewHolder {
     val context = parent.context
@@ -19,14 +23,32 @@ class GuestAdapter : RecyclerView.Adapter<GuestAdapter.GuestViewHolder>() {
   }
 
   override fun onBindViewHolder(holder: GuestViewHolder, position: Int) {
-    TODO("Not yet implemented")
+    if (!cursor.moveToPosition(position)) {
+      return
+    }
+
+    val guestIdIndex = cursor.getColumnIndex(WaitlistContract.WaitlistEntry.COLUMN_GUEST_ID)
+    val guestNameIndex = cursor.getColumnIndex(WaitlistContract.WaitlistEntry.COLUMN_GUEST_NAME)
+    val guestNumberIndex = cursor.getColumnIndex(WaitlistContract.WaitlistEntry.COLUMN_GUEST_NUMBER)
+
+    val guestId = cursor.getInt(guestIdIndex)
+    val guestName = cursor.getString(guestNameIndex)
+    val guestNumber = cursor.getInt(guestNumberIndex)
+
+    holder.textViewGuestName.text = guestName
+    holder.textViewGuestNumber.text = guestNumber.toString()
+    holder.itemView.tag = guestId
   }
 
-  override fun getItemCount(): Int {
-    TODO("Not yet implemented")
-  }
+  override fun getItemCount(): Int = cursor.count
 
   inner class GuestViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    var textViewGuestName: TextView
+    var textViewGuestNumber: TextView
 
+    init {
+      textViewGuestName = view.findViewById(R.id.textView_guest_name)
+      textViewGuestNumber = view.findViewById(R.id.editText_guest_number)
+    }
   }
 }
