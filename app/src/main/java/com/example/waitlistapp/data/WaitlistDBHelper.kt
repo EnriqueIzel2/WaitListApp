@@ -15,7 +15,7 @@ class WaitlistDBHelper(context: Context) :
   override fun onCreate(db: SQLiteDatabase?) {
     val sql = """
       CREATE TABLE ${WaitlistContract.WaitlistEntry.TABLE_NAME} (
-      ${WaitlistContract.WaitlistEntry.COLUMN_GUEST_ID} INTEGER PRIMARY KEY AUTO INCREMENT,
+      ${WaitlistContract.WaitlistEntry.COLUMN_GUEST_ID} INTEGER PRIMARY KEY AUTOINCREMENT,
       ${WaitlistContract.WaitlistEntry.COLUMN_GUEST_NAME} TEXT NOT NULL,
       ${WaitlistContract.WaitlistEntry.COLUMN_GUEST_NUMBER} INTEGER NOT NULL,
       ${WaitlistContract.WaitlistEntry.COLUMN_GUEST_TIMESTAMP} TIMESTAMP DEFAULT CURRENT_TIMESTAMP
