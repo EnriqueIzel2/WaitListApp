@@ -58,7 +58,7 @@ class GuestAdapter(private var cursor: Cursor) :
 
     init {
       textViewGuestName = view.findViewById(R.id.textView_guest_name)
-      textViewGuestNumber = view.findViewById(R.id.editText_guest_number)
+      textViewGuestNumber = view.findViewById(R.id.textView_guest_number)
     }
   }
 }
